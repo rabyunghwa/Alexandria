@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class LogUtil {
 
-    static boolean isReleased = false;
+    static boolean isReleased = true;
 
     // message type set to Object so that we can handle
     // all types of messages

@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.awesome.byunghwa.app.alexandria.R;
+
 import java.io.InputStream;
 
 /**
@@ -32,7 +34,12 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        bmImage.setImageBitmap(result);
+        if (result != null) {
+            bmImage.setImageBitmap(result);
+        } else {
+            bmImage.setImageResource(R.drawable.ic_launcher);
+        }
+
     }
 }
 
