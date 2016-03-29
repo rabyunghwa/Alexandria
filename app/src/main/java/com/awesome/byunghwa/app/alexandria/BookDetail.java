@@ -33,7 +33,7 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     private View rootView;
     private String ean;
     private String bookTitle;
-    //private ShareActionProvider shareActionProvider;
+    private ActionBar actionBar;
 
     public BookDetail() {
     }
@@ -68,17 +68,16 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar_book_detail);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
 
-        final ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        //actionBar.setHomeButtonEnabled(true);
+            actionBar = activity.getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
-        // temporarily disable swipe gesture of navigation drawer
-        ((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            ((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+
 
         return rootView;
     }
@@ -93,9 +92,6 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.book_detail, menu);
-
-//        MenuItem menuItem = menu.findItem(R.id.action_share);
-//        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
     }
 
     @Override
@@ -136,12 +132,9 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
         bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
         ((TextView) rootView.findViewById(R.id.fullBookTitle)).setText(bookTitle);
 
-//            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-//            shareIntent.setType("text/plain");
-//            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text) + bookTitle);
-//            shareActionProvider.setShareIntent(shareIntent);
-        //}
+        if (actionBar != null) {
+            actionBar.setTitle(bookTitle);
+        }
 
         String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
         ((TextView) rootView.findViewById(R.id.fullBookSubTitle)).setText(bookSubTitle);
@@ -179,8 +172,8 @@ public class BookDetail extends Fragment implements LoaderManager.LoaderCallback
     @Override
     public void onPause() {
         super.onDestroyView();
-        if (MainActivity.IS_TABLET && rootView.findViewById(R.id.right_container) == null) {
-            getActivity().getSupportFragmentManager().popBackStack();
-        }
+//        if (MainActivity.IS_TABLET && rootView.findViewById(R.id.right_container) == null) {
+//            getActivity().getSupportFragmentManager().popBackStack();
+//        }
     }
 }

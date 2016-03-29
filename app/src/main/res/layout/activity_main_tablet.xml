@@ -26,9 +26,17 @@
          android:layout_gravity="left" instead. -->
     <!-- The drawer is given a fixed width in dp and extends the full height of
          the container. -->
-    <fragment android:id="@+id/navigation_drawer"
-        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
-        android:layout_gravity="start" android:name="com.awesome.byunghwa.app.alexandria.NavigationDrawerFragment"
-        tools:layout="@layout/fragment_navigation_drawer" />
+    <!--<fragment android:id="@+id/navigation_drawer"-->
+        <!--android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start" android:name="com.awesome.byunghwa.app.alexandria.NavigationDrawerFragment"-->
+        <!--tools:layout="@layout/fragment_navigation_drawer" />-->
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/menu_nav_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

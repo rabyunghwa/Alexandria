@@ -16,6 +16,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,31 +60,22 @@ public class MainActivity extends AppCompatActivity implements Callback {
             setContentView(R.layout.activity_main);
         }
 
-//        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
-
         messageReciever = new MessageReciever();
         IntentFilter filter = new IntentFilter(MESSAGE_EVENT);
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReciever,filter);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-//
-//        setSupportActionBar(toolbar);
-
-//        AppCompatActivity activity = this;
-//        final ActionBar actionBar = activity.getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-//        actionBar.setHomeButtonEnabled(true);
-
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_tablet);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
 
         // on activity initial start, there is no fragment inflated. we should initialize one
         if (savedInstanceState == null) {
@@ -104,8 +96,10 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 navigationView.setCheckedItem(R.id.drawer_add_scan_book);
             }
 
+            int containerViewId= R.id.container;
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, fragment, tag)
+                    .replace(containerViewId, fragment, tag)
                     .addToBackStack(tag)
                     .commit();
         }
@@ -114,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements Callback {
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(MenuItem menuItem) {
-//                    menuItem.setChecked(true);
                     mDrawerLayout.closeDrawers();
                     FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -129,18 +122,29 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
                             case R.id.drawer_book_list:
                                 nextFragment = new ListOfBooks();
+                                if (getSupportActionBar() != null) {
+                                    getSupportActionBar().setTitle(getResources().getString(R.string.drawer_book_list));
+                                }
                                 break;
                             case R.id.drawer_add_scan_book:
                                 nextFragment = new AddBook();
+                                if (getSupportActionBar() != null) {
+                                    getSupportActionBar().setTitle(getResources().getString(R.string.drawer_add_scan_book));
+                                }
                                 break;
                             case R.id.drawer_about:
                                 nextFragment = new About();
+                                if (getSupportActionBar() != null) {
+                                    getSupportActionBar().setTitle(getResources().getString(R.string.drawer_about));
+                                }
                                 break;
                             default:
                         }
 
+                        int containerViewId = R.id.container;
+
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, nextFragment, String.valueOf(menuItem.getItemId()))
+                                .replace(containerViewId, nextFragment, String.valueOf(menuItem.getItemId()))
                                 .addToBackStack(String.valueOf(menuItem.getItemId()))
                                 .commit();
                         return true;
@@ -149,59 +153,11 @@ public class MainActivity extends AppCompatActivity implements Callback {
             });
         }
 
-//        navigationDrawerFragment = (NavigationDrawerFragment)
-//                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-//        title = getTitle();
-
-
-//        ActionBar actionBar = getDelegate().getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setTitle(getResources().getString(R.string.settings));
-//        }
-
-        // Set up the drawer.
-//        navigationDrawerFragment.setUp(R.id.navigation_drawer,
-//                    (DrawerLayout) findViewById(R.id.drawer_layout));
     }
-
-//    @Override
-//    public void onNavigationDrawerItemSelected(int position) {
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        Fragment nextFragment;
-//
-//        switch (position){
-//            default:
-//            case 0:
-//                nextFragment = new ListOfBooks();
-//                break;
-//            case 1:
-//                nextFragment = new AddBook();
-//                break;
-//            case 2:
-//                nextFragment = new About();
-//                break;
-//        }
-//
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, nextFragment)
-//                .addToBackStack((String) title)
-//                .commit();
-//    }
 
     public void setTitle(int titleId) {
         title = getString(titleId);
     }
-
-//    public void restoreActionBar() {
-//        ActionBar actionBar = getSupportActionBar();
-//        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        //actionBar.setHomeAsUpIndicator();
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setTitle(title);
-//    }
 
 
     @Override
@@ -217,21 +173,6 @@ public class MainActivity extends AppCompatActivity implements Callback {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_settings) {
-//            startActivity(new Intent(this, SettingsActivity.class));
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -242,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         switch (id) {
             case android.R.id.home:
                 // if user is in book detail fragment, then do not open drawer
-                if (getSupportFragmentManager().findFragmentByTag("Book Detail") != null) {
+                if (getSupportFragmentManager().findFragmentByTag("Book Detail") != null && (findViewById(R.id.right_container) == null)) {
                     getSupportFragmentManager().popBackStack();
                 } else {
                     mDrawerLayout.openDrawer(GravityCompat.START);
@@ -265,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
     @Override
     public void onItemSelected(String ean) {
+        //Toast.makeText(this, "on item selected gets called...", Toast.LENGTH_SHORT).show();
         Bundle args = new Bundle();
         args.putString(BookDetail.EAN_KEY, ean);
 

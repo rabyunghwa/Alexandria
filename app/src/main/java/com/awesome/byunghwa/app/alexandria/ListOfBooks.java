@@ -54,24 +54,45 @@ public class ListOfBooks extends Fragment implements LoaderManager.LoaderCallbac
         bookListAdapter = new BookListAdapter(getActivity(), cursor, 0);
         View rootView = inflater.inflate(R.layout.fragment_list_of_books, container, false);
         searchText = (EditText) rootView.findViewById(R.id.searchText);
-        rootView.findViewById(R.id.searchButton).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ListOfBooks.this.restartLoader();
+        if (rootView.findViewById(R.id.searchButton) != null) {
+            rootView.findViewById(R.id.searchButton).setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ListOfBooks.this.restartLoader();
+                        }
                     }
-                }
-        );
+            );
+        }
+
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar_book_list);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
 
-        final ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+            final ActionBar actionBar = activity.getSupportActionBar();
+
+            // if its tablet layout, then there is no action bar. so we have to double check here
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+                actionBar.setHomeButtonEnabled(true);
+
+                actionBar.setTitle(getResources().getString(R.string.drawer_book_list));
+            }
+        } else {
+            // its tablet layout
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity != null) {
+                if (activity.getSupportActionBar() != null) {
+                    activity.getSupportActionBar().setTitle(getResources().getString(R.string.drawer_book_list));
+                }
+
+            }
+
+        }
 
         bookList = (ListView) rootView.findViewById(R.id.listOfBooks);
         bookList.setAdapter(bookListAdapter);

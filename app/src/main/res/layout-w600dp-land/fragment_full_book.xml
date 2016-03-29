@@ -3,27 +3,14 @@
     android:orientation="vertical"
     android:layout_height="match_parent" tools:context="com.awesome.byunghwa.app.alexandria.AddBook">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_book_detail"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <ScrollView android:layout_width="fill_parent"
-                    android:layout_height="0dp"
-                    android:fillViewport="false"
-                    android:layout_weight="1">
+            android:layout_height="0dp"
+            android:fillViewport="false"
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:orientation="horizontal"
@@ -63,8 +50,7 @@
                     android:textSize="18sp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
-                    android:layout_below="@id/fullBookCover"
-                    android:layout_alignTop="@+id/fullBookCover"
+                    android:layout_below="@+id/fullBookCover"
                     android:layout_toRightOf="@+id/fullBookCover"
                     android:layout_toEndOf="@+id/fullBookCover"/>
 
@@ -75,7 +61,7 @@
                     android:id="@+id/fullBookDesc"
                     android:ellipsize="end"
                     android:layout_marginLeft="10dp"
-                    android:layout_below="@+id/fullBookCover"
+                    android:layout_below="@+id/fullBookSubTitle"
                     android:layout_margin="10dp"
                     />
 

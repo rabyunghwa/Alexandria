@@ -121,7 +121,7 @@
                 android:layout_weight="1"
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/delete_button"
-                android:drawableLeft="@drawable/ic_action_discard"
+                android:drawableLeft="@drawable/ic_delete_white_24dp"
                 android:visibility="invisible"
                 />
 
@@ -132,7 +132,7 @@
                 android:visibility="invisible"
                 android:layout_weight="1"
                 android:id="@+id/save_button"
-                android:drawableLeft="@drawable/ic_action_accept"
+                android:drawableLeft="@drawable/ic_done_white_24dp"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_gravity="bottom"
                 />

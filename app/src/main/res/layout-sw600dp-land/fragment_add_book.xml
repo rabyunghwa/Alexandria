@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="it.jaschke.alexandria.AddBook">
+    android:layout_height="match_parent" tools:context=".MainActivity">
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bookTitle"
+            tools:text="BookTitle"
             android:textSize="@dimen/head_line"
             android:textIsSelectable="true"
             android:textStyle="bold"
@@ -56,6 +57,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bookSubTitle"
             android:layout_below="@+id/bookTitle"
+            tools:text="Subtitle"
             android:layout_alignLeft="@+id/bookTitle"
             android:layout_alignStart="@+id/bookTitle"
             android:layout_marginTop="10dp"/>
@@ -67,6 +69,8 @@
             android:contentDescription="@string/book_cover"
             android:minHeight="20dip"
             android:minWidth="20dip"
+            tools:src="@drawable/ic_launcher"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/bookSubTitle"
             android:layout_alignLeft="@+id/bookSubTitle"
             android:layout_alignStart="@+id/bookSubTitle"
@@ -77,6 +81,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/authors"
             android:textSize="@dimen/small_fontsize"
+            tools:text="Authors"
             android:layout_marginLeft="25dp"
             android:layout_alignTop="@+id/bookCover"
             android:layout_toRightOf="@+id/bookCover"
@@ -87,6 +92,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/categories"
             android:textSize="@dimen/small_fontsize"
+            tools:text="Categories"
             android:layout_below="@+id/bookCover"
             android:layout_alignLeft="@+id/bookCover"
             android:layout_alignStart="@+id/bookCover"
@@ -100,26 +106,31 @@
             android:layout_alignParentRight="true"
             >
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/cancel_button"
                 android:layout_weight="1"
-                android:src="@drawable/ic_action_discard"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/cancel_button"
+                android:drawableBottom="@drawable/ic_delete_white_24dp"
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/delete_button"
                 android:visibility="invisible"
                 />
 
-            <ImageButton
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/ok_button"
+                android:textColor="@android:color/white"
+                android:gravity="center"
                 android:text="@string/ok_button"
                 android:layout_weight="1"
                 android:id="@+id/save_button"
                 android:visibility="invisible"
-                android:src="@drawable/ic_action_accept"
+                android:drawableBottom="@drawable/ic_done_white_24dp"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_gravity="bottom"
                 />

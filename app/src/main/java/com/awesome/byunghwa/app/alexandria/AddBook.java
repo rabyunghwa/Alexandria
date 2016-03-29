@@ -154,13 +154,26 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar_add_book);
 
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.setSupportActionBar(toolbar);
 
-        final ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+            final ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+                actionBar.setHomeButtonEnabled(true);
+
+                actionBar.setTitle(getResources().getString(R.string.drawer_add_scan_book));
+            }
+        } else {
+            // its tablet layout
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().setTitle(getResources().getString(R.string.drawer_add_scan_book));
+            }
+
+        }
 
         if(savedInstanceState!=null){
             ean.setText(savedInstanceState.getString(EAN_CONTENT));

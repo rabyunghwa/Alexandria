@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">亚历山大</string>
+
+    <!-- Menu Items -->
+    <string name="books">图书列表</string>
+    <string name="scan">扫描/添加一本书</string>
+    <string name="about">关于这个应用</string>
+
+    <string name="navigation_drawer_open" >打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="action_settings">设置</string>
+    <string name="scan_button">扫描</string>
+    <string name="input_hint">输入ISBN-13. 仅限数字.</string>
+    <string name="book_cover">图书封面</string>
+
+    <string name="ok_button">接下来</string>
+    <string name="cancel_button">取消</string>
+    <string name="not_found">没有找到图书</string>
+    <string name="search">搜索</string>
+    <string name="delete">删除图书</string>
+    <string name="pref_startScreen">选择启动页</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="action_share">分享</string>
+    <string name="back_button">返回</string>
+    <string name="share_text">一本必读书目: </string>
+
+    <string name="settings">设置</string>
+
+    <string name="drawer_book_list">图书列表</string>
+    <string name="drawer_add_scan_book">扫描/添加一本图书</string>
+    <string name="drawer_about">关于这个应用</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="about_text">这个应用利用谷歌提供的API来获取图书信息. 所有的标题, 图书封面图片, 以及作者信息都来自于此.
+    这个应用最初版本是由Sascha Jaschke编写的, 在此基础上稍作改动的版本交给微学位课程的学生来完成</string>
+    <string name="no_network">没有网络连接. 请到设置里打开网络连接</string>
+</resources>

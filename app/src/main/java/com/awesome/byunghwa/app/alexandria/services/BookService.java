@@ -120,7 +120,7 @@ public class BookService extends IntentService {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    ToastUtil.showToast("No internet connection. Please go to settings and enable network connection.");
+                    ToastUtil.showToast(getString(R.string.no_network));
                 }
             });
             return;

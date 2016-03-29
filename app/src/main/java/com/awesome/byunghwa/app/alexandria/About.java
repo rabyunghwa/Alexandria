@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class About extends Fragment {
 
-    public About(){
+    public About() {
 
     }
 
@@ -25,12 +25,26 @@ public class About extends Fragment {
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar_about);
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
 
-        final ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setHomeButtonEnabled(true);
+        if (toolbar != null) {
+            activity.setSupportActionBar(toolbar);
+
+            final ActionBar actionBar = activity.getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+                actionBar.setHomeButtonEnabled(true);
+
+                actionBar.setTitle(getResources().getString(R.string.drawer_about));
+            }
+
+        } else {
+            // its tablet layout
+            if (activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().setTitle(getResources().getString(R.string.drawer_about));
+            }
+
+        }
 
         return rootView;
     }
